@@ -19,7 +19,7 @@ public:
     Logger (const std::string& fileName, const std::string& lvl);
     ~Logger();
     void log (const std::string& lvl, const std::string& msg);
-    void setLogLevel(Level lvl);
+    void setLogLevel(const std::string& lvl);
 
 
 private:
@@ -27,7 +27,7 @@ private:
     Level logLevel;
 
     std::string getCurrentTime();
-    Logger::Level getLogLevel(const std::string& lvl);
+    Level getLogLevel(const std::string& lvl);
 };
 
 

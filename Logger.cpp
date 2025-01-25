@@ -40,9 +40,9 @@ void Logger::log(const std::string& lvl, const std::string& message)
 
 }
 
-void Logger::setLogLevel(const Level lvl)
+void Logger::setLogLevel(const std::string& lvl)
 {
-    logLevel = lvl;
+    logLevel = getLogLevel(lvl);
 }
 
 std::string Logger::getCurrentTime()
