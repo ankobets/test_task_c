@@ -15,9 +15,6 @@ int main(int argc, char *argv[])
     std::string log_file = argv[1];
     std::string log_level = argv[2];
 
-    // std::string log_file = "file.txt";
-    // std::string log_level = "warning";
-
     Logger temp(log_file, log_level);
 
     temp.log("ERROR", "Hello World!");
