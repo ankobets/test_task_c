@@ -16,9 +16,9 @@ public:
         INFO, WARNING, ERROR
     };
 
-    Logger (const std::string& fileName, Level lvl);
+    Logger (const std::string& fileName, const std::string& lvl);
     ~Logger();
-    void log (Level lvl, const std::string& msg);
+    void log (const std::string& lvl, const std::string& msg);
     void setLogLevel(Level lvl);
 
 
@@ -27,9 +27,8 @@ private:
     Level logLevel;
 
     std::string getCurrentTime();
-    std::string getLogLevel(Level lvl);
+    Logger::Level getLogLevel(const std::string& lvl);
 };
-
 
 
 #endif //LOGGER_H

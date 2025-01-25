@@ -9,9 +9,12 @@
 #include <chrono>
 #include <iomanip>
 
-Logger::Logger (const std::string& fileName, const Level lvl)
+
+
+
+Logger::Logger (const std::string& fileName, const std::string& lvl)
 {
-    logLevel = lvl;
+    logLevel = getLogLevel(lvl);
 
     if (!logFile)
     {
@@ -26,12 +29,12 @@ Logger::~Logger()
     logFile.close();
 }
 
-void Logger::log(const Level lvl, const std::string& message)
+void Logger::log(const std::string& lvl, const std::string& message)
 {
     std::stringstream ss;
-    if (lvl < logLevel) return;
+    if (getLogLevel(lvl) < logLevel) return;
 
-    ss<<"["<<getCurrentTime()<<"] "<<"["<<getLogLevel(lvl)<<"] "<<message<<std::endl;
+    ss<<"["<<getCurrentTime()<<"] "<<"["<<lvl<<"] "<<message<<std::endl;
     logFile<<ss.str();
 
 
@@ -56,16 +59,15 @@ std::string Logger::getCurrentTime()
 
 }
 
-std::string Logger::getLogLevel(const Level lvl)
+Logger::Level Logger::getLogLevel(const std::string& lvl)
 {
-    switch (lvl)
+    if (lvl == "INFO" || lvl =="Info" || lvl == "info")
+            return Level::INFO;
+    else if (lvl == "WARNING" || lvl == "Warning" || lvl == "warning")
     {
-        case Level::INFO:
-            return "INFO";
-        case Level::WARNING:
-            return "WARNING";
-        case Level::ERROR:
-            return "ERROR";
-
+        return Level::WARNING;
+    } else if (lvl == "ERROR" || lvl == "Error" || lvl == "error")
+    {
+        return Level::ERROR;
     }
 }
